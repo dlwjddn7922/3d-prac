@@ -8,8 +8,12 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 3;
     [SerializeField] private GameObject deadEffect;
     [SerializeField] private GameObject waterdeadEffect;
+    [SerializeField] private GameObject raft;
+    [SerializeField] private Transform raftPos;
     Animator anim;
     Rigidbody rb;
+    bool isMove = false;
+    bool isRaft = false;
     
     void Start()
     {
@@ -31,16 +35,16 @@ public class PlayerController : MonoBehaviour
         switch (p_moveType)
         {
             case E_DirectionType.Up:
-                offsetPos = Vector3.forward;
+                offsetPos = Vector3.forward + Vector3.up;
                 break;
             case E_DirectionType.Down:
-                offsetPos = Vector3.back;
+                offsetPos = Vector3.back + Vector3.up;
                 break;
             case E_DirectionType.Left:
-                offsetPos = Vector3.left;
+                offsetPos = Vector3.left + Vector3.up;
                 break;
             case E_DirectionType.Right:
-                offsetPos = Vector3.right;
+                offsetPos = Vector3.right + Vector3.up;
                 break;
             default:
                 Debug.LogErrorFormat("SetPlayerMove : Error{0}", p_moveType);
@@ -53,8 +57,8 @@ public class PlayerController : MonoBehaviour
     {
 
         ControllPlayer();
+        UpdateRaft();
     }
-
 
     void ControllPlayer()
     {
@@ -64,26 +68,30 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.UpArrow) && !isMove)
             {
+                isMove = true;
                 PlayerMove(E_DirectionType.Up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 1f);
                 anim.SetInteger("Walk", 1);
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.DownArrow)&& !isMove)
             {
+                isMove = true;
                 PlayerMove(E_DirectionType.Down);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 1f);
                 anim.SetInteger("Walk", 1);
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isMove)
             {
+                isMove = true;
                 PlayerMove(E_DirectionType.Left);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 1f);
                 anim.SetInteger("Walk", 1);
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            else if (Input.GetKeyDown(KeyCode.RightArrow) && !isMove)
             {
+                isMove = true;
                 PlayerMove(E_DirectionType.Right);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 1f);
                 anim.SetInteger("Walk", 1);
@@ -93,6 +101,30 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("Walk", 0);
             }
         }
+    }
+    Vector3 raftoffsetPos = Vector3.zero;
+    public void UpdateRaft()
+    {
+        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3 outraft = new Vector3(0f, 0f, 1.5f);
+            this.transform.position = raft.transform.position + outraft;
+            isRaft = false;
+            raft = null;
+            raftPos = null;
+
+        }
+        else if(isRaft == true)
+        {
+            Vector3 actorpos = raft.transform.position;
+            this.transform.position = actorpos;
+        }
+        if (raft == null)
+        {
+            return;
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -108,5 +140,31 @@ public class PlayerController : MonoBehaviour
             effect.transform.position = transform.position;
             Destroy(gameObject);
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Floor"))
+        {
+            isMove = false;
+        }
+        if (collision.transform.CompareTag("Raft"))
+        {
+            raft = collision.gameObject;
+            raftPos = raft.transform;
+            //raftoffsetPos = this.transform.position - raft.transform.position;            
+            isRaft = true;            
+            isMove = false;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if(collision.transform.CompareTag("Raft"))
+        {
+            raftPos = null;
+            raft = null;
+            raftoffsetPos = Vector3.zero;
+            isRaft = false;
+        }
+        
     }
 }
