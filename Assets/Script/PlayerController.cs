@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public float movementSpeed = 3;
+    public float movementSpeed = 1;
     [SerializeField] private GameObject deadEffect;
     [SerializeField] private GameObject waterdeadEffect;
     [SerializeField] private GameObject raft;
@@ -35,16 +35,16 @@ public class PlayerController : MonoBehaviour
         switch (p_moveType)
         {
             case E_DirectionType.Up:
-                offsetPos = Vector3.forward + Vector3.up;
+                offsetPos = (Vector3.forward * movementSpeed) + Vector3.up;
                 break;
             case E_DirectionType.Down:
-                offsetPos = Vector3.back + Vector3.up;
+                offsetPos = (Vector3.back * movementSpeed) + Vector3.up;
                 break;
             case E_DirectionType.Left:
-                offsetPos = Vector3.left + Vector3.up;
+                offsetPos = (Vector3.left * movementSpeed) + Vector3.up;
                 break;
             case E_DirectionType.Right:
-                offsetPos = Vector3.right + Vector3.up;
+                offsetPos = (Vector3.right * movementSpeed) + Vector3.up;
                 break;
             default:
                 Debug.LogErrorFormat("SetPlayerMove : Error{0}", p_moveType);
@@ -128,12 +128,12 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        /*if(other.transform.CompareTag("Car"))
+        if (other.transform.CompareTag("Car"))
         {
             GameObject effect = Instantiate(deadEffect);
             effect.transform.position = transform.position;
             Destroy(gameObject);
-        }*/
+        }
         if (other.transform.CompareTag("Water"))
         {
             GameObject effect = Instantiate(waterdeadEffect);
