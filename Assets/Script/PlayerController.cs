@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject waterdeadEffect;
     [SerializeField] private GameObject raft;
     [SerializeField] private Transform raftPos;
+    public Map map;
     Animator anim;
     Rigidbody rb;
     bool isMove = false;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        map.UpdateForwardBackMove((int)this.transform.position.z);
     }
     public enum E_DirectionType
     {
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
         this.transform.position += offsetPos;
+        map.UpdateForwardBackMove((int)this.transform.position.z);
     }
 
     void Update()
@@ -132,13 +135,13 @@ public class PlayerController : MonoBehaviour
         {
             GameObject effect = Instantiate(deadEffect);
             effect.transform.position = transform.position;
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
         if (other.transform.CompareTag("Water"))
         {
             GameObject effect = Instantiate(waterdeadEffect);
             effect.transform.position = transform.position;
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
     private void OnCollisionEnter(Collision collision)
