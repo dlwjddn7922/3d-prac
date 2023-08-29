@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject waterdeadEffect;
     [SerializeField] private GameObject raft;
     [SerializeField] private Transform raftPos;
+    [SerializeField] private GameObject plane;
     public Map map;
     Animator anim;
     Rigidbody rb;
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
         switch (p_moveType)
         {
             case E_DirectionType.Up:
-                offsetPos = (Vector3.forward * movementSpeed) + Vector3.up;
+                offsetPos = (Vector3.forward * movementSpeed) + Vector3.up;               
                 break;
             case E_DirectionType.Down:
                 offsetPos = (Vector3.back * movementSpeed) + Vector3.up;
@@ -70,13 +71,14 @@ public class PlayerController : MonoBehaviour
         if(moveHorizontal == 0 || moveVertical == 0)
         {
             Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-
+            Vector3 planePos = Vector3.forward;
             if (Input.GetKeyDown(KeyCode.UpArrow) && !isMove)
             {
                 isMove = true;
                 PlayerMove(E_DirectionType.Up);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 1f);
                 anim.SetInteger("Walk", 1);
+                plane.transform.position += planePos;
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow)&& !isMove)
             {

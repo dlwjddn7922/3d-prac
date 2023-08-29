@@ -10,7 +10,7 @@ public class Map : MonoBehaviour
         BusRoad,
         Water,
         TrainRoad,
-        //land,
+        land,
         Max
     }
     public enum E_LastRoadType
@@ -19,7 +19,7 @@ public class Map : MonoBehaviour
         BusRoad,
         Water,
         TrainRoad,
-        //land,
+        land,
         Max
     }
     //[SerializeField] private GameObject[] RoadObjArray;
@@ -27,11 +27,12 @@ public class Map : MonoBehaviour
     [SerializeField] private BusRoad busroad;
     [SerializeField] private Water water;
     [SerializeField] private TrainRoad trainroad;
+    [SerializeField] private GameObject land1;
+    [SerializeField] private GameObject plane;
     protected List<Transform> MapList = new List<Transform>();
     protected Dictionary<int, Transform> MapDic = new Dictionary<int, Transform>();
     protected E_LastRoadType lastRoadType = E_LastRoadType.Max;
     protected int lastPos = 0;
-    [SerializeField] private Transform parentTrans;
     public int minPos = -20;
     public int maxPos = 20;
     public int FrontOffsetPosz = 10;
@@ -52,27 +53,35 @@ public class Map : MonoBehaviour
                 int setVal = 0;
                 if (i < 0)
                 {
-                    GenerateTrainRoad(i);
+                    GenerateLand(i);
                 }
                 else
                 {
                     if (lastRoadType == E_LastRoadType.TrainRoad)
                     {
-                        int randomval = Random.Range(0, 2);
+                        int randomval = Random.Range(0, 3);
                         if (randomval == 0)
                         {
                             setVal = RandomWater(i);
 
                         }
-                        else
+                        else if (randomval == 1)
                         {
-                            setVal = RandomRoad(i);
+                            setVal = RandomBusRoad(i);
+                        }
+                        else if (randomval == 2)
+                        {
+                            setVal = RandomLand(i);
+                        }
+                        else if (randomval == 3)
+                        {
+                            setVal = RandomTrainRoad(i);
                         }
                         lastRoadType = E_LastRoadType.Road;
                     }
                     else
                     {
-                        setVal = RandomTrainRoad(i);
+                        setVal = RandomRoad(i);
                         lastRoadType = E_LastRoadType.TrainRoad;
                     }
                     i += setVal - 1;
@@ -81,29 +90,63 @@ public class Map : MonoBehaviour
             lastPos = i;
         }
         if(lastPos < p_posz + FrontOffsetPosz)
-        {
+        {           
             int setVal = 0;
             if (lastRoadType == E_LastRoadType.TrainRoad)
             {
-                int randomval = Random.Range(0, 2);
+                int randomval = Random.Range(0, 4);
                 if (randomval == 0)
                 {
                     setVal = RandomWater(lastPos);
 
                 }
-                else
+                else if (randomval == 1)
                 {
-                    setVal = RandomRoad(lastPos);
+                    setVal = RandomTrainRoad(lastPos);
+                }
+                else if (randomval == 2)
+                {
+                    setVal = RandomBusRoad(lastPos);
+                    //setVal = RandomLand(lastPos);
+                }
+                else if (randomval == 3)
+                {
+                    setVal = RandomLand(lastPos);
+
+                    //setVal = RandomBusRoad(lastPos);
                 }
                 lastRoadType = E_LastRoadType.Road;
             }
             else
             {
-                setVal = RandomTrainRoad(lastPos);
+                setVal = RandomRoad(lastPos);
                 lastRoadType = E_LastRoadType.TrainRoad;
             }
             lastPos += setVal;
         }
+    }
+    public int RandomLand(int p_pos)
+    {
+        int randomCount = Random.Range(1, 4);
+        for (int i = 0; i < randomCount; i++)
+        {
+            GenerateLand(p_pos + i);
+        }
+        return randomCount;
+    }
+    public void GenerateLand(int p_pos)
+    {
+        GameObject cloneObj = GameObject.Instantiate(land1.gameObject);
+
+        Vector3 offsetPos = Vector3.zero;
+        offsetPos.z = p_pos * 1.8f;
+        p_pos = p_pos * 2;
+        //cloneObj.transform.SetParent(parentTrans);
+        cloneObj.transform.position = offsetPos;
+        cloneObj.name = "Land" + p_pos.ToString();
+        cloneObj.gameObject.SetActive(true);
+        MapList.Add(cloneObj.transform);
+        MapDic.Add(p_pos, cloneObj.transform);
     }
     public int RandomRoad(int p_pos)
     {
@@ -119,10 +162,12 @@ public class Map : MonoBehaviour
         GameObject cloneObj = GameObject.Instantiate(road.gameObject);
 
         Vector3 offsetPos = Vector3.zero;
-        offsetPos.z = p_pos;
-        cloneObj.transform.SetParent(parentTrans);
+        offsetPos.z = p_pos * 1.8f;
+        p_pos = p_pos * 2;
+        //cloneObj.transform.SetParent(parentTrans);
         cloneObj.transform.position = offsetPos;
         cloneObj.name = "Road" + p_pos.ToString();
+        cloneObj.gameObject.SetActive(true);
         MapList.Add(cloneObj.transform);
         MapDic.Add(p_pos, cloneObj.transform);
     }
@@ -140,10 +185,12 @@ public class Map : MonoBehaviour
         GameObject cloneObj = GameObject.Instantiate(busroad.gameObject);
 
         Vector3 offsetPos = Vector3.zero;
-        offsetPos.z = p_pos;
-        cloneObj.transform.SetParent(parentTrans);
+        offsetPos.z = p_pos * 1.8f;
+        p_pos = p_pos * 2;
+        //cloneObj.transform.SetParent(parentTrans);
         cloneObj.transform.position = offsetPos;
         cloneObj.name = "BusRoad" + p_pos.ToString();
+        cloneObj.gameObject.SetActive(true);
         MapList.Add(cloneObj.transform);
         MapDic.Add(p_pos, cloneObj.transform);
     }
@@ -161,16 +208,18 @@ public class Map : MonoBehaviour
         GameObject cloneObj = GameObject.Instantiate(trainroad.gameObject);
 
         Vector3 offsetPos = Vector3.zero;
-        offsetPos.z = p_pos;
-        cloneObj.transform.SetParent(parentTrans);
+        offsetPos.z = p_pos * 1.8f;
+        p_pos = p_pos * 2;
+        //cloneObj.transform.SetParent(parentTrans);
         cloneObj.transform.position = offsetPos;
         cloneObj.name = "TrainRoad" + p_pos.ToString();
+        cloneObj.gameObject.SetActive(true);
         MapList.Add(cloneObj.transform);
         MapDic.Add(p_pos, cloneObj.transform);
     }
     public int RandomWater(int p_pos)
     {
-        int randomCount = Random.Range(1, 4);
+        int randomCount = Random.Range(1, 1);
         for (int i = 0; i < randomCount; i++)
         {
             GenerateWater(p_pos + i);
@@ -182,10 +231,12 @@ public class Map : MonoBehaviour
         GameObject cloneObj = GameObject.Instantiate(water.gameObject);
 
         Vector3 offsetPos = Vector3.zero;
-        offsetPos.z = p_pos;
-        cloneObj.transform.SetParent(parentTrans);
+        offsetPos.z = p_pos *1.8f;
+        p_pos = p_pos * 2;
+       //cloneObj.transform.SetParent(parentTrans);
         cloneObj.transform.position = offsetPos;
         cloneObj.name = "Water" + p_pos.ToString();
+        cloneObj.gameObject.SetActive(true);
         MapList.Add(cloneObj.transform);
         MapDic.Add(p_pos, cloneObj.transform);
     }

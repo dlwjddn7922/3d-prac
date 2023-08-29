@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-    float MoveSpeed = 3.5f;
+    float MoveSpeed = 6f;
     float RangeDestory = 0.5f;
     void Start()
     {

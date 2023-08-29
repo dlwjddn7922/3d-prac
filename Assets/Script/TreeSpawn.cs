@@ -25,7 +25,7 @@ public class TreeSpawn : MonoBehaviour
             {
                 randomindex = Random.Range(0, EnvirmentObjList.Count);
                 tempClone = GameObject.Instantiate(tree[randomindex].gameObject);               
-                offsetPos.Set(i, 0f, 0f);
+                offsetPos.Set(0f, 0f, i);
                
                 tempClone.transform.SetParent(this.transform);
                 tempClone.transform.localPosition = offsetPos;

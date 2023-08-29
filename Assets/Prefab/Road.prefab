@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CloneTarget: {fileID: 5411467692404505177, guid: 77d2d8cb53aad404483c89c92d0d2422, type: 3}
   GenerationPos: {fileID: 4408576625684742785}
-  GenerationPersent: 50
+  GenerationPersent: 30
   CloneDelaySec: 2
 --- !u!33 &4408576624336240912
 MeshFilter:

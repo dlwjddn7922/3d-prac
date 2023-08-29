@@ -6,7 +6,7 @@ public class Road : MonoBehaviour
 {
     [SerializeField] private Car CloneTarget;
     [SerializeField] Transform GenerationPos;
-    public int GenerationPersent = 50;
+    public int GenerationPersent = 30;
 
     public float CloneDelaySec = 2f;
 

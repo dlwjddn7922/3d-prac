@@ -6,7 +6,7 @@ public class BusRoad : MonoBehaviour
 {
     [SerializeField] private Bus CloneTarget;
     [SerializeField] Transform GenerationPos;
-    public int GenerationPersent = 50;
+    public int GenerationPersent = 30;
 
     public float CloneDelaySec = 2f;
 
