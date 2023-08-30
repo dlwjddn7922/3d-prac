@@ -6,6 +6,7 @@ public class TrainRoad : MonoBehaviour
 {
     [SerializeField] private Train CloneTarget;
     [SerializeField] Transform GenerationPos;
+    [SerializeField] Light trainLight;
     public int GenerationPersent = 100;
 
     public float CloneDelaySec = 10f;
@@ -21,6 +22,15 @@ public class TrainRoad : MonoBehaviour
     void Update()
     {
         currSec += Time.deltaTime;
+        if( currSec >= 8f)
+        {
+            trainLight.color = Color.red;
+        }
+        else
+        {
+            trainLight.color = Color.green;
+        }
+
         if (currSec >= NextSecToClone)
         {
             int randomVal = Random.Range(0, 100);

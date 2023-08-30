@@ -33,6 +33,9 @@ public class Map : MonoBehaviour
     protected Dictionary<int, Transform> MapDic = new Dictionary<int, Transform>();
     protected E_LastRoadType lastRoadType = E_LastRoadType.Max;
     protected int lastPos = 0;
+    protected int MinLine = 0;
+    public int deleteLine = 5;
+    public int backoffsetCount = 20;
     public int minPos = -20;
     public int maxPos = 20;
     public int FrontOffsetPosz = 10;
@@ -47,7 +50,9 @@ public class Map : MonoBehaviour
         if (MapList.Count <= 0)
         {
             lastRoadType = E_LastRoadType.TrainRoad;
+            MinLine = minPos;
             int i = 0;
+            //초기세팅
             for (i = minPos; i < maxPos; i++)
             {
                 int setVal = 0;
@@ -89,6 +94,7 @@ public class Map : MonoBehaviour
             }
             lastPos = i;
         }
+        //이동시 길생성
         if(lastPos < p_posz + FrontOffsetPosz)
         {           
             int setVal = 0;
@@ -123,6 +129,26 @@ public class Map : MonoBehaviour
                 lastRoadType = E_LastRoadType.TrainRoad;
             }
             lastPos += setVal;
+        }
+        //길지우기
+        if(p_posz - backoffsetCount > MinLine - deleteLine )
+        {
+            int count = MinLine + deleteLine;
+            for (int i = MinLine; i < count; i++)
+            {
+                RemoveLine(i);
+            }
+            MinLine += deleteLine;
+        }
+    }
+    void RemoveLine(int p_posz)
+    {
+        if ( MapDic.ContainsKey(p_posz))
+        {
+            Transform transobj = MapDic[p_posz];
+            GameObject.Destroy(transobj.gameObject);
+            MapList.Remove(transobj);
+            MapDic.Remove(p_posz);
         }
     }
     public int RandomLand(int p_pos)

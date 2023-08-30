@@ -62,6 +62,8 @@ public class PlayerController : MonoBehaviour
 
         ControllPlayer();
         UpdateRaft();
+        
+
     }
 
     void ControllPlayer()
@@ -71,7 +73,7 @@ public class PlayerController : MonoBehaviour
         if(moveHorizontal == 0 || moveVertical == 0)
         {
             Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-            Vector3 planePos = Vector3.forward;
+            Vector3 planePos = Vector3.forward;           
             if (Input.GetKeyDown(KeyCode.UpArrow) && !isMove)
             {
                 isMove = true;
@@ -79,6 +81,8 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 1f);
                 anim.SetInteger("Walk", 1);
                 plane.transform.position += planePos;
+                UI.Instance.Score += 1;
+                
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow)&& !isMove)
             {
@@ -86,6 +90,7 @@ public class PlayerController : MonoBehaviour
                 PlayerMove(E_DirectionType.Down);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 1f);
                 anim.SetInteger("Walk", 1);
+                UI.Instance.Score -= 1;
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isMove)
             {
@@ -115,6 +120,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 outraft = new Vector3(0f, 0f, 1.5f);
             this.transform.position = raft.transform.position + outraft;
+            UI.Instance.Score += 1;
             isRaft = false;
             raft = null;
             raftPos = null;
@@ -137,13 +143,13 @@ public class PlayerController : MonoBehaviour
         {
             GameObject effect = Instantiate(deadEffect);
             effect.transform.position = transform.position;
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
         if (other.transform.CompareTag("Water"))
         {
             GameObject effect = Instantiate(waterdeadEffect);
             effect.transform.position = transform.position;
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
     private void OnCollisionEnter(Collision collision)

@@ -254,7 +254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7035550301074693724}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 1.42, z: -0.8}
+  m_LocalPosition: {x: -0.06, y: 1.42, z: -0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -274,7 +274,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 20
-  m_Range: 1.85
+  m_Range: 2.5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -341,7 +341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7035550301566170972
 Transform:
   m_ObjectHideFlags: 0
@@ -373,6 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CloneTarget: {fileID: -8568419349220842099, guid: 8ce47ca9f843f624595f67eee6b459dc, type: 3}
   GenerationPos: {fileID: 7035550302443192505}
+  trainLight: {fileID: 7035550301074693726}
   GenerationPersent: 100
   CloneDelaySec: 10
 --- !u!33 &7035550301566170946
