@@ -2015,7 +2015,7 @@ GameObject:
   - component: {fileID: 1096240672}
   - component: {fileID: 1096240673}
   m_Layer: 0
-  m_Name: UI
+  m_Name: '[UI]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2051,10 +2051,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreTxt: {fileID: 1011774721}
   coinTxt: {fileID: 2000298851}
-  dieImg: {fileID: 98098356}
-  coindieImg: {fileID: 250244691}
   hightScoretxt: {fileID: 1180726129}
   lastScoretxt: {fileID: 1885857576}
+  dieImage: {fileID: 98098356}
+  coindieImage: {fileID: 250244691}
   player: {fileID: 3216076047588155707}
 --- !u!1 &1147579410
 GameObject:
@@ -2547,7 +2547,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1096240673}
         m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: OnQuit
+        m_MethodName: OnLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2671,57 +2671,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664408937}
   m_CullTransparentMesh: 1
---- !u!1 &1687511995
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1687511996}
-  - component: {fileID: 1687511997}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1687511996
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687511995}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.357584, y: 2.0435247, z: 3.162581}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1687511997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687511995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2e4e3f233800834b99b6c7261e72929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreTxt: {fileID: 1011774721}
-  coinTxt: {fileID: 0}
-  dieImg: {fileID: 0}
-  coindieImg: {fileID: 0}
-  hightScoretxt: {fileID: 0}
-  lastScoretxt: {fileID: 0}
-  player: {fileID: 0}
 --- !u!1 &1724463292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,7 +2757,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1096240673}
         m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: OnQuit
+        m_MethodName: OnLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3748,7 +3697,7 @@ GameObject:
   - component: {fileID: 3305462500235825985}
   m_Layer: 7
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

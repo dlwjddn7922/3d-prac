@@ -10,14 +10,15 @@ public class UI : Singleton<UI>
     // Start is called before the first frame update
     [SerializeField] TMP_Text scoreTxt;
     [SerializeField] TMP_Text coinTxt;
-    [SerializeField] Image dieImg;
-    [SerializeField] Image coindieImg;
     [SerializeField] TMP_Text hightScoretxt;
     [SerializeField] TMP_Text lastScoretxt;
+    [SerializeField] Image dieImage;
+    [SerializeField] Image coindieImage;
     [SerializeField] PlayerController player;
-    int currentScore = 0;
  
     private int startinghighscore;
+    private int startinghighscore2;
+    private int startinghighscore3;
 
     private int score;
     public int Score
@@ -48,8 +49,10 @@ public class UI : Singleton<UI>
     void Start()
     {
         startinghighscore = PlayerPrefs.GetInt("highscore");
+        startinghighscore2 = PlayerPrefs.GetInt("highscore2");
+        startinghighscore3 = PlayerPrefs.GetInt("highscore3");  
         Score = 0;
-        Coin = 50;
+        Coin = 500;
     }
 
     // Update is called once per frame
@@ -58,7 +61,7 @@ public class UI : Singleton<UI>
         savesocre();
         if (player.playerdie == true)
         {
-            coindieImg.gameObject.SetActive(true);
+            coindieImage.gameObject.SetActive(true);
         }
         if (player == null)
         {
@@ -69,13 +72,25 @@ public class UI : Singleton<UI>
     {
         if (player == null)
         { UpdateHighScore(); }
-        dieImg.gameObject.SetActive(true);
+        dieImage.gameObject.SetActive(true);
     }
     public void UpdateHighScore()
     {
         if (Score > startinghighscore)
         {
+            PlayerPrefs.SetInt("highscore3", startinghighscore2);
+            PlayerPrefs.SetInt("highscore2", startinghighscore);
             PlayerPrefs.SetInt("highscore", Score);
+
+        }
+        else if (Score > startinghighscore2)
+        {
+            PlayerPrefs.SetInt("highscore3", startinghighscore2);
+            PlayerPrefs.SetInt("highscore2", Score);
+        }
+        else if (Score > startinghighscore3)
+        {
+            PlayerPrefs.SetInt("highscore3", Score);
         }
         PlayerPrefs.SetInt("lastscore", Score);
     }
@@ -90,14 +105,14 @@ public class UI : Singleton<UI>
     {              
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    public void OnQuit()
+    public void OnLobby()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Lobby");
     }
     public void Onrevive()
     {
+        coindieImage.gameObject.SetActive(false);
         player.gameObject.SetActive(true);
-        coindieImg.gameObject.SetActive(false);
         player.playerdie = false;
         Coin -= 50;
         player.OnDamaged();
