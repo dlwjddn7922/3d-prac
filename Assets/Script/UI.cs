@@ -9,7 +9,9 @@ public class UI : Singleton<UI>
 {
     // Start is called before the first frame update
     [SerializeField] TMP_Text scoreTxt;
+    [SerializeField] TMP_Text coinTxt;
     [SerializeField] Image dieImg;
+    [SerializeField] Image coindieImg;
     [SerializeField] TMP_Text hightScoretxt;
     [SerializeField] TMP_Text lastScoretxt;
     [SerializeField] PlayerController player;
@@ -30,17 +32,35 @@ public class UI : Singleton<UI>
             scoreTxt.text = $"{score}";
         }
     }
+    private int coin;
+    public int Coin
+    {
+        get
+        {
+            return coin;
+        }
+        set
+        {
+            coin = value;
+            coinTxt.text = $"{coin}";
+        }
+    }
     void Start()
     {
         startinghighscore = PlayerPrefs.GetInt("highscore");
         Score = 0;
+        Coin = 50;
     }
 
     // Update is called once per frame
     void Update()
     {
         savesocre();
-        if(player == null)
+        if (player.playerdie == true)
+        {
+            coindieImg.gameObject.SetActive(true);
+        }
+        if (player == null)
         {
             Gameover();
         }
@@ -69,5 +89,17 @@ public class UI : Singleton<UI>
     public void OnRestart()
     {              
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void OnQuit()
+    {
+        Application.Quit();
+    }
+    public void Onrevive()
+    {
+        player.gameObject.SetActive(true);
+        coindieImg.gameObject.SetActive(false);
+        player.playerdie = false;
+        Coin -= 50;
+        player.OnDamaged();
     }
 }

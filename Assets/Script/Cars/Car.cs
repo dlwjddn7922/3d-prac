@@ -21,5 +21,17 @@ public class Car : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        if(UI.Instance.Score >= 40)
+        {
+            MoveSpeed = 8f;
+        }
+        else if(UI.Instance.Score >= 70)
+        {
+            MoveSpeed = 10f;
+        }
+        else if(UI.Instance.Score >= 100)
+        {
+            MoveSpeed = 12f;
+        }
     }
 }

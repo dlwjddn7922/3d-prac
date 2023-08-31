@@ -22,33 +22,67 @@ public class TrainRoad : MonoBehaviour
     void Update()
     {
         currSec += Time.deltaTime;
-        if( currSec >= 8f)
-        {
-            trainLight.color = Color.red;
-        }
-        else
-        {
-            trainLight.color = Color.green;
-        }
-
         if (currSec >= NextSecToClone)
         {
-            int randomVal = Random.Range(0, 100);
-            if (randomVal <= GenerationPersent)
-            {
-                CloneCar();
-            }
+            CloneCar();
             currSec = 0f;
-            //NextSecToClone = currSec + CloneDelaySec;
         }
-    }
-    void CloneCar()
-    {
-        Transform clonePos = GenerationPos;
-        Vector3 offsetPos = clonePos.position;
-        offsetPos.y = 0.3f;
+        if (UI.Instance.Score >= 0)
+        {
+            if (currSec >= 8f)
+            {
+                trainLight.color = Color.red;
+            }
+            else
+            {
+                trainLight.color = Color.green;
+            }
+            NextSecToClone = 10;
+        }
+        else if (UI.Instance.Score >= 40)
+        {
+            if (currSec >= 6f)
+            {
+                trainLight.color = Color.red;
+            }
+            else
+            {
+                trainLight.color = Color.green;
+            }
+            NextSecToClone = 8;
+        }
+        else if (UI.Instance.Score >= 70)
+        {
+            if (currSec >= 4f)
+            {
+                trainLight.color = Color.red;
+            }
+            else
+            {
+                trainLight.color = Color.green;
+            }
+            NextSecToClone = 6;
+        }
+        else if (UI.Instance.Score >= 100)
+        {
+            if (currSec >= 3f)
+            {
+                trainLight.color = Color.red;
+            }
+            else
+            {
+                trainLight.color = Color.green;
+            }
+            NextSecToClone = 5;
+        }
+        void CloneCar()
+        {
+            Transform clonePos = GenerationPos;
+            Vector3 offsetPos = clonePos.position;
+            offsetPos.y = 0.3f;
 
-        GameObject cloneobj = GameObject.Instantiate(CloneTarget.gameObject, offsetPos, GenerationPos.rotation, this.transform);
-        cloneobj.SetActive(true);
+            GameObject cloneobj = GameObject.Instantiate(CloneTarget.gameObject, offsetPos, GenerationPos.rotation, this.transform);
+            cloneobj.SetActive(true);
+        }
     }
 }

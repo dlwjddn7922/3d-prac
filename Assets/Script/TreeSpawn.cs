@@ -30,7 +30,6 @@ public class TreeSpawn : MonoBehaviour
                 tempClone.transform.SetParent(this.transform);
                 tempClone.transform.localPosition = offsetPos;
             }
-
         }
     }
     void Start()

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5077874077167377723}
   - component: {fileID: 5422006021500620444}
   - component: {fileID: 5913061937243255883}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rear_Right_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8420512723930716865}
   - component: {fileID: 8933070388497806363}
   - component: {fileID: 4311786560816754997}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Front_Left_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 7443815879798445239}
   - component: {fileID: 7443815879798445238}
   - component: {fileID: 32421116}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rear_Right_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ WheelCollider:
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!54 &32421116
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7443815880172851115}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 7443815881045259067}
   - component: {fileID: 7443815881045259066}
   - component: {fileID: 1336484803}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Front_Right_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ WheelCollider:
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!54 &1336484803
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 7443815881211399284}
   - component: {fileID: 7443815881211399179}
   - component: {fileID: 1853783578}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rear_Left_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ WheelCollider:
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!54 &1853783578
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 7443815881364798689}
   - component: {fileID: 7443815881364798688}
   - component: {fileID: 314935862}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Front_Left_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ WheelCollider:
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!54 &314935862
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -526,7 +526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7443815881707987276}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wheel_colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 6973549589771650353}
   - component: {fileID: 7507586522045824995}
   - component: {fileID: 4600558546296138690}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: bus
   m_TagString: Car
   m_Icon: {fileID: 0}
@@ -611,8 +611,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.5, z: 3.4}
-  m_Center: {x: 0, y: 0, z: -0.14}
+  m_Size: {x: 0.2, y: 0.2, z: 3.4}
+  m_Center: {x: 0, y: 0.09, z: -0.14}
 --- !u!1 &7818535231580021390
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,9 +624,7 @@ GameObject:
   - component: {fileID: 827972769889944015}
   - component: {fileID: 2177375143390945776}
   - component: {fileID: 224872914745430401}
-  - component: {fileID: 7443815881652855519}
-  - component: {fileID: 7443815881652855512}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -698,32 +696,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7443815881652855519
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7818535231580021390}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.025229925, y: 0.013947372, z: 0.07235681}
-  m_Center: {x: 0, y: 0.02087377, z: -0.002178278}
---- !u!65 &7443815881652855512
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7818535231580021390}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.026028346, y: 0.010663604, z: 0.07436326}
-  m_Center: {x: 0, y: 0.008668155, z: -0.0011811006}
 --- !u!1 &8407408982162303901
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +707,7 @@ GameObject:
   - component: {fileID: 1121429363468022998}
   - component: {fileID: 8847379895699004356}
   - component: {fileID: 423909469521417655}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rear_Left_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -818,7 +790,7 @@ GameObject:
   - component: {fileID: 9036268841588591818}
   - component: {fileID: 5786877937999257073}
   - component: {fileID: 542676980682131593}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Front_Right_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

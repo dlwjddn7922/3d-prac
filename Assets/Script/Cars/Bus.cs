@@ -21,5 +21,17 @@ public class Bus : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        if (UI.Instance.Score >= 40)
+        {
+            MoveSpeed = 7f;
+        }
+        else if (UI.Instance.Score >= 70)
+        {
+            MoveSpeed = 9f;
+        }
+        else if (UI.Instance.Score >= 100)
+        {
+            MoveSpeed = 12f;
+        }
     }
 }

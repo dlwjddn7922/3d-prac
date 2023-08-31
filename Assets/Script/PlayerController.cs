@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
 
     public float movementSpeed = 1;
@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     bool isMove = false;
     bool isRaft = false;
+    public bool playerdie = false;
+    public bool isrevive = false;
     
     void Start()
     {
@@ -118,7 +120,7 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Vector3 outraft = new Vector3(0f, 0f, 1.5f);
+            Vector3 outraft = new Vector3(0f, 0f, 2f);
             this.transform.position = raft.transform.position + outraft;
             UI.Instance.Score += 1;
             isRaft = false;
@@ -143,13 +145,35 @@ public class PlayerController : MonoBehaviour
         {
             GameObject effect = Instantiate(deadEffect);
             effect.transform.position = transform.position;
-            Destroy(gameObject);
+            if(UI.Instance.Coin >= 50 && !isrevive)
+            {
+                gameObject.SetActive(false);
+                playerdie = true;
+                isrevive = true;
+            }else
+            {
+                Destroy(gameObject);
+            }
         }
         if (other.transform.CompareTag("Water"))
         {
             GameObject effect = Instantiate(waterdeadEffect);
             effect.transform.position = transform.position;
-            Destroy(gameObject);
+            if (UI.Instance.Coin >= 50 && !isrevive)
+            {
+                gameObject.SetActive(false);
+                playerdie = true;
+                isrevive = true;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+        if (other.transform.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            UI.Instance.Coin += 1;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -177,5 +201,16 @@ public class PlayerController : MonoBehaviour
             isRaft = false;
         }
         
+    }
+    public void OnDamaged()
+    {
+        gameObject.layer = 7;
+        StartCoroutine("OffDamaged");       
+    }
+    IEnumerator OffDamaged()
+    {
+        gameObject.layer = 8;
+        yield return new WaitForSeconds(2f);
+        gameObject.layer = 7;
     }
 }

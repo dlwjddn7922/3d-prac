@@ -31,6 +31,18 @@ public class Road : MonoBehaviour
             currSec = 0f;
             //NextSecToClone = currSec + CloneDelaySec;
         }
+        if (UI.Instance.Score >= 40)
+        {
+            GenerationPersent = 40;
+        }
+        else if (UI.Instance.Score >= 70)
+        {
+            GenerationPersent = 50;
+        }
+        else if (UI.Instance.Score >= 100)
+        {
+            GenerationPersent = 60;
+        }
     }
     void CloneCar()
     {
