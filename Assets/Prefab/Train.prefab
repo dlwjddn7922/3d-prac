@@ -487,6 +487,7 @@ GameObject:
   - component: {fileID: 199315345391179629}
   - component: {fileID: 209179691052009839}
   - component: {fileID: 4568713500349027699}
+  - component: {fileID: -2782314377727482639}
   m_Layer: 0
   m_Name: Train
   m_TagString: Car
@@ -594,6 +595,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: f9a98c064c73f494c82833c96b6d7ff3, type: 3}
+--- !u!65 &-2782314377727482639
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195103165650005837}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.1193497, y: 4.4720855, z: 13.7002325}
+  m_Center: {x: 0, y: 2.4810922, z: 0.96582866}
 --- !u!1 &195219281564812275
 GameObject:
   m_ObjectHideFlags: 0
